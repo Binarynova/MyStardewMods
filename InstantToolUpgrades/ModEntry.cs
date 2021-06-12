@@ -42,12 +42,14 @@ namespace InstantToolUpgrades
                     // If so upgrade it and cancel the upgrade.
                     Game1.player.trashCanLevel++;
                     Game1.player.toolBeingUpgraded.Value = null;
+                    Game1.player.daysLeftForToolUpgrade.Value = 0;
                 }
                 else
                 {
                     // Otherwise, give the player the tool right away and cancel the upgrade.
                     Game1.player.addItemToInventory(Game1.player.toolBeingUpgraded.Value);
                     Game1.player.toolBeingUpgraded.Value = null;
+                    Game1.player.daysLeftForToolUpgrade.Value = 0;
                 }
             }
         }
