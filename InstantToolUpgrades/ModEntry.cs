@@ -44,7 +44,7 @@ namespace InstantToolUpgrades
                 }
                 else
                 {
-                    // Otherwise, give the player the tool right away.
+                    // Otherwise, give the player their new tool.
                     Game1.player.addItemToInventory(Game1.player.toolBeingUpgraded.Value);
                 }
                 
