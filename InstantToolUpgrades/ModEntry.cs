@@ -26,8 +26,8 @@ namespace InstantToolUpgrades
             if(asset.AssetNameEquals("Strings/StringsFromCSFiles"))
             {
                 IDictionary<string, string> data = asset.AsDictionary<string, string>().Data;
-                data["ShopMenu.cs.11474"] = "I can upgrade your tools with more power.";
-                data["Tool.cs.14317"] = "Thanks. And... Here you go. Enjoy the new tool!";
+                data["ShopMenu.cs.11474"] = Helper.Translation.Get("crafting-window");
+                data["Tool.cs.14317"] = Helper.Translation.Get("post-purchase-dialogue");
             }
         }
 
