@@ -36,9 +36,19 @@ namespace InstantToolUpgrades
             // Any time the player submits a tool to be upgraded...
             if (Game1.player.daysLeftForToolUpgrade.Value > 0)
             {
-                // Give the player the tool right away and cancel the upgrade.
-                Game1.player.addItemToInventory(Game1.player.toolBeingUpgraded.Value);
-                Game1.player.toolBeingUpgraded.Value = null;
+                // Check to see if it's the trash can.
+                if(Game1.player.toolBeingUpgraded.Value.BaseName.Contains("Trash"))
+                {
+                    // If so upgrade it and cancel the upgrade.
+                    Game1.player.trashCanLevel++;
+                    Game1.player.toolBeingUpgraded.Value = null;
+                }
+                else
+                {
+                    // Otherwise, give the player the tool right away and cancel the upgrade.
+                    Game1.player.addItemToInventory(Game1.player.toolBeingUpgraded.Value);
+                    Game1.player.toolBeingUpgraded.Value = null;
+                }
             }
         }
 	}
