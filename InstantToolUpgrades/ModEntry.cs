@@ -14,7 +14,7 @@ namespace InstantToolUpgrades
 
         public bool CanEdit<T>(IAssetInfo asset)
         {
-            if(asset.AssetNameEquals("Strings/StringsFromCSFiles"))
+            if(asset.AssetName.Contains("StringsFromCSFiles"))
             {
                 return true;
             }
@@ -22,13 +22,10 @@ namespace InstantToolUpgrades
         }
 
         public void Edit<T>(IAssetData asset)
-        {
-            if(asset.AssetNameEquals("Strings/StringsFromCSFiles"))
-            {
-                IDictionary<string, string> data = asset.AsDictionary<string, string>().Data;
-                data["ShopMenu.cs.11474"] = Helper.Translation.Get("crafting-window");
-                data["Tool.cs.14317"] = Helper.Translation.Get("post-purchase-dialogue");
-            }
+        {            
+            IDictionary<string, string> data = asset.AsDictionary<string, string>().Data;
+            data["ShopMenu.cs.11474"] = Helper.Translation.Get("crafting-window");
+            data["Tool.cs.14317"] = Helper.Translation.Get("post-purchase-dialogue");
         }
 
         private void OnUpdateTicked(object sender, EventArgs e)
