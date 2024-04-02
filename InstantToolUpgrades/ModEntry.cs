@@ -2,35 +2,30 @@
 using StardewModdingAPI;
 using StardewValley;
 using System.Collections.Generic;
+using StardewModdingAPI.Events;
+using StardewValley.Inventories;
 
 namespace InstantToolUpgrades
 {
-    public class ModEntry : Mod, IAssetEditor
+    public class ModEntry : Mod
     {
         public override void Entry(IModHelper helper)
         {
-            helper.Events.GameLoop.UpdateTicked += this.OnUpdateTicked;
+            helper.Events.Player.InventoryChanged += OnInventoryChanged;
+            helper.Events.Content.AssetRequested += OnAssetRequested;
         }
 
-        public bool CanEdit<T>(IAssetInfo asset)
-        {
-            if(asset.AssetName.Contains("StringsFromCSFiles"))
-            {
-                return true;
+        private void OnAssetRequested(object sender, AssetRequestedEventArgs e) {
+            if(e.Name.IsEquivalentTo("Strings/StringsFromCSFiles")) {
+                e.Edit(asset => {
+                    asset.AsDictionary<string, string>().Data["ShopMenu.cs.11474"] = Helper.Translation.Get("crafting-window");
+                    asset.AsDictionary<string, string>().Data["Tool.cs.14317"] = Helper.Translation.Get("post-purchase-dialogue");
+                });
             }
-            return false;
         }
 
-        public void Edit<T>(IAssetData asset)
-        {            
-            IDictionary<string, string> data = asset.AsDictionary<string, string>().Data;
-            data["ShopMenu.cs.11474"] = Helper.Translation.Get("crafting-window");
-            data["Tool.cs.14317"] = Helper.Translation.Get("post-purchase-dialogue");
-        }
-
-        private void OnUpdateTicked(object sender, EventArgs e)
+        private void OnInventoryChanged(object sender, InventoryChangedEventArgs e)
         {
-            // Any time the player submits a tool to be upgraded...
             if (Game1.player.daysLeftForToolUpgrade.Value > 0)
             {
                 // Check to see if it's a genericTool...
@@ -42,9 +37,9 @@ namespace InstantToolUpgrades
                 else
                 {
                     // Otherwise give the player their new tool.
-                    Game1.player.addItemToInventory(Game1.player.toolBeingUpgraded.Value);                    
+                    Game1.player.addItemToInventory(Game1.player.toolBeingUpgraded.Value);
                 }
-                
+
                 // Finally, cancel the queued upgrade.
                 Game1.player.toolBeingUpgraded.Value = null;
                 Game1.player.daysLeftForToolUpgrade.Value = 0;
