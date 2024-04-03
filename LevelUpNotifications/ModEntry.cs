@@ -27,7 +27,8 @@ namespace LevelUpNotifications
                 // If you've already leveled today (and therefore seen the official message), and you level again, show the "custom" message.
                 if(numOfLevelUpsToday > 0)
                 {
-                    string levelUpMessage = Helper.Translation.Get("level-up-notification").ToString();
+                    IDictionary<string, string> data = Helper.GameContent.Load<Dictionary<string, string>>("Strings/1_6_Strings");
+                    string levelUpMessage = data["NewIdeas"];
                     Game1.addHUDMessage(HUDMessage.ForCornerTextbox(levelUpMessage));
                 }
 
