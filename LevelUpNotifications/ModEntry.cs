@@ -24,7 +24,6 @@ namespace LevelUpNotifications
         {
             if(e.NewLevel > e.OldLevel)
             {
-                // If you've already leveled today (and therefore seen the official message), and you level again, show the "custom" message.
                 if(numOfLevelUpsToday > 0)
                 {
                     IDictionary<string, string> data = Helper.GameContent.Load<Dictionary<string, string>>("Strings/1_6_Strings");
