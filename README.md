@@ -6,3 +6,4 @@ I got the idea for this repo format from [danvolchek's StardewMods repo](https:/
 
 # Mod Summaries
 - [Instant Tool Upgrades](https://github.com/Binarynova/MyStardewMods/tree/main/InstantToolUpgrades): Removes the two-day waiting period for tool upgrades. Clint gives the player their new tool right away!
+- [Level Up Notifications](https://github.com/Binarynova/MyStardewMods/tree/main/LevelUpNotifications): Removes the limitiation of only showing one level up notification per day!
