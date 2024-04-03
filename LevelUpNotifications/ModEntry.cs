@@ -11,6 +11,7 @@ namespace LevelUpNotifications
 {
     public class ModEntry : Mod
     {
+        // Using a custom counter to avoid duplicating the level up message on the first level up of every day.
         private int numOfLevelUpsToday = 0;
 
         public override void Entry(IModHelper helper)
@@ -23,6 +24,7 @@ namespace LevelUpNotifications
         {
             if(e.NewLevel > e.OldLevel)
             {
+                // If you've already leveled today (and therefore seen the official message), and you level again, show the "custom" message.
                 if(numOfLevelUpsToday > 0)
                 {
                     string levelUpMessage = Helper.Translation.Get("level-up-notification").ToString();
@@ -35,6 +37,7 @@ namespace LevelUpNotifications
 
         private void ResetLevelUpCounter(object? sender, EventArgs e)
         {
+            // Reset counter every morning.
             numOfLevelUpsToday = 0;
         }
     }
